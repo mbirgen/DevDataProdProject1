@@ -1,0 +1,27 @@
+---
+title: "R Notebook"
+author: "Mariah Birgen"
+always_allow_html: yes
+
+---
+```{r, echo = FALSE, warning=FALSE}
+today <- Sys.Date()
+require(leaflet)
+```
+
+Today: `r today`.
+
+The data loaded is information about Geocaches that have been hidden by my team.
+```{r, echo = FALSE, warning=FALSE}
+myHides <- read.csv('MyHides.csv')
+myHides <- as.data.frame(myHides)
+```
+
+Map of birgenfamily geocache hides
+```{r, warning=FALSE}
+myHides %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(clusterOptions = markerClusterOptions(), popup = myHides$Name)
+```
+
